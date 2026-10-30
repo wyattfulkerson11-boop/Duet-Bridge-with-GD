@@ -352,6 +352,12 @@ test("push refuses a wrong shape, an oversized file or a missing file", async ()
   await refused(await make({ context: null }), /\.duet\/DUET-CONTEXT\.md is missing/);
 });
 
+test("the as-of date may wrap onto the next line", async () => {
+  const s = await withContext(CONTEXT.replace("as of 2026-10-30", "as of\n2026-10-30"));
+  const r = await s.push();
+  assert.equal(r.code, 0, r.stderr);
+});
+
 test("headings may carry more words", async () => {
   const s = await withContext(CONTEXT.replace("## Rules", "## Rules for each change"));
   assert.equal((await s.push()).code, 0);

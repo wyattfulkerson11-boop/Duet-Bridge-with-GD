@@ -185,7 +185,7 @@ function setup(argv) {
 
 function shapeProblems(text) {
   const out = HEADINGS.filter((h) => !new RegExp(`^## ${h}(?=[ (]|$)`, "m").test(text)).map((h) => `missing heading "## ${h}"`);
-  if (!/\bas of \d{4}-\d{2}-\d{2}\b/i.test(text)) out.push(`no "as of YYYY-MM-DD" line`);
+  if (!/\bas of\s+\d{4}-\d{2}-\d{2}\b/i.test(text)) out.push(`no "as of YYYY-MM-DD" line`);
   return out;
 }
 
